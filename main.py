@@ -139,7 +139,7 @@ elif page == "3D Scatterplot":
 
 elif page == "Function 4":
     #insert code of chosen functionality 4
-    st.markdown("insert functionality 4")
+    st.markdown("kantot mo ako daddy")
 
 else:
     #insert code if chosen functionality 5
