@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import plotly as px
+import plotly.express as px
 
 @st.cache_data
 def load_data(path: str = "curated-solubility-dataset.csv") -> pd.DataFrame:
