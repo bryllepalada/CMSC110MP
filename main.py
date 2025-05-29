@@ -173,7 +173,7 @@ elif page == "Solubility Comparison":
 
 else:
     st.title("⚛️ Molecule Visualizer")
-    st.caption("Draw a molecule or pick one from the dataset to see its experimental solubility.")
+    st.caption("Pick one compound from the dataset to see its 2-D structure.")
     st.sidebar.header("Dataset Browser")
 
     def show_table():
@@ -194,10 +194,7 @@ else:
             if st.sidebar.button(f"Load ➜ {row['Name']} ({row['ID']})"):
                 st.session_state["preset_smiles"] = row["SMILES"]
     
-    # --- Main layout ----------------------------------------------------------
-    left, right = st.columns([1, 1])
-    
-    with left:
+  
         st.subheader("✏️ Molecule editor")
         smiles = st_ketcher(value=st.session_state.get("preset_smiles", ""))
     
