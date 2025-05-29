@@ -27,7 +27,7 @@ if page == "Home":
     - **2D Scatterplot** 2D Plot of Solubility vs one descriptor 
     - **3D Scatterplot** 3D Space of Solubility vs two descriptors
     - **Solubility Comparison Tool** Compare solubilities of different compounds!
-    - **insert renzo's** under construction
+    - **Molecule Visualizer** Generate 2-D Structures of compounds
     """)
 
 #1. SEARCHER ----------------------------------------
@@ -195,5 +195,5 @@ else:
                 st.session_state["preset_smiles"] = row["SMILES"]
     
   
-        st.subheader("✏️ Molecule editor")
+        st.subheader("Visualizer:")
         smiles = st_ketcher(value=st.session_state.get("preset_smiles", ""))
