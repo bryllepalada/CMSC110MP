@@ -1,6 +1,10 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+from streamlit_ketcher import st_ketcher
+import pandas as pd
+from rdkit import Chem
+from rdkit.Chem import Draw
 
 @st.cache_data
 def load_data(path: str = "curated-solubility-dataset.csv") -> pd.DataFrame:
@@ -168,5 +172,59 @@ elif page == "Function 4":
         st.info("Please select one or more compounds to compare.")
 
 else:
-    #insert code if chosen functionality 5
+    df = load_data(DATA_PATH)
+
+    st.title("💧 Aqueous Solubility Explorer")
+    st.caption("Draw a molecule or pick one from the dataset to see its experimental solubility.")
+
+    # --- Sidebar controls -----------------------------------------------------
+    st.sidebar.header("Dataset Browser")
+
+    def show_table():
+        st.dataframe(
+            df[["ID", "Name", "SMILES", "Solubility", "MolWt", "MolLogP"]].sort_values("Solubility"),
+            use_container_width=True,
+        )
+
+    if st.sidebar.checkbox("Show data table"):
+        show_table()
+
+    # Quick search by Name/ID
+    query = st.sidebar.text_input("🔍 Quick search (Name or ID)")
+    if query:
+        hits = df[df["Name"].str.contains(query, case=False) | df["ID"].str.contains(query, case=False)]
+        st.sidebar.write(f"Found {len(hits)} match(es)")
+        for idx, row in hits.head(5).iterrows():
+            if st.sidebar.button(f"Load ➜ {row['Name']} ({row['ID']})"):
+                st.session_state["preset_smiles"] = row["SMILES"]
+
+    # --- Main layout ----------------------------------------------------------
+    left, right = st.columns([1, 1])
+
+    with left:
+        st.subheader("✏️ Molecule editor")
+        smiles = st_ketcher(value=st.session_state.get("preset_smiles", ""))
+
+        if smiles:
+            st.markdown(f"**SMILES:** `{smiles}`")
+            mol = Chem.MolFromSmiles(smiles)
+            if mol:
+                st.image(Draw.MolToImage(mol, size=(250, 250)))
+            else:
+                st.error("⚠️ RDKit could not parse this SMILES.")
+
+    with right:
+        st.subheader("🧪 Experimental data")
+        if smiles:
+            records = df[df["SMILES"] == smiles]
+            if not records.empty:
+                st.success("Match found in dataset! Displaying properties below.")
+                st.dataframe(records.T.rename(columns={records.index[0]: "Value"}))
+            else:
+                st.info("No matching entry in the dataset. Try browsing or drawing another molecule.")
+        else:
+            st.info("Draw or load a molecule to see its properties here.")
+
+    # Cleanup temporary state so the next draw starts fresh unless re‑loaded
+    st.session_state.pop("preset_smiles", None)
     st.markdown("insert functionality 5")
