@@ -172,8 +172,9 @@ elif page == "Solubility Comparison":
         st.info("Please select one or more compounds to compare.")
 
 else:
-    st.title("`streamlit-ketcher`")
-    st.header("Component with user input")
+    st.title("💧 Aqueous Solubility Explorer")
+    st.caption("Draw a molecule or pick one from the dataset to see its experimental solubility.")
+    
     DEFAULT_MOL = (
         r"C[N+]1=CC=C(/C2=C3\C=CC(=N3)/C(C3=CC=CC(C(N)=O)=C3)=C3/C=C/C(=C(\C4=CC=[N+]"
         "(C)C=C4)C4=N/C(=C(/C5=CC=CC(C(N)=O)=C5)C5=CC=C2N5)C=C4)N3)C=C1"
