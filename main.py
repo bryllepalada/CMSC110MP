@@ -208,16 +208,3 @@ else:
                 st.image(Draw.MolToImage(mol, size=(250, 250)))
             else:
                 st.error("⚠️ RDKit could not parse this SMILES.")
-
-    with right:
-        st.subheader("🧪 Experimental data")
-        if smiles:
-            records = df[df["SMILES"] == smiles]
-            if not records.empty:
-                st.success("Match found in dataset! Displaying properties below.")
-                st.dataframe(records.T.rename(columns={records.index[0]: "Value"}))
-            else:
-                st.info("No matching entry in the dataset. Try browsing or drawing another molecule.")
-        else:
-            st.info("Draw or load a molecule to see its properties here.")
-    
