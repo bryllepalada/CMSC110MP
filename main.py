@@ -201,7 +201,4 @@ else:
         if smiles:
             st.markdown(f"**SMILES:** `{smiles}`")
             mol = Chem.MolFromSmiles(smiles)
-            if mol:
-                st.image(Draw.MolToImage(mol, size=(250, 250)))
-            else:
-                st.error("⚠️ RDKit could not parse this SMILES.")
+            st.image(Draw.MolToImage(mol, size=(250, 250)))
