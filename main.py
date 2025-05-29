@@ -173,7 +173,7 @@ elif page == "Solubility Comparison":
 
 else:
     st.title("⚛️ Molecule Visualizer")
-    st.caption("Pick one compound from the dataset to see its 2-D structure.")
+    st.caption("Pick one compound from the dataset, then enter its name or ID in the sidebar to see its 2-D structure.")
     st.sidebar.header("Dataset Browser")
 
     def show_table():
