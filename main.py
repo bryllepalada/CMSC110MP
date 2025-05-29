@@ -47,6 +47,7 @@ elif page == "Searcher":
 
 #2. 2D SCATTERPLOT ----------------------------------------
 elif page == "2D Scatterplot":
+    st.title("📈 2D Scatterplot")
     st.sidebar.header("Filter & Plot Settings")
 
     # 1) MolWt slider filter
