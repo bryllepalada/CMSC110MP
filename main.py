@@ -200,5 +200,4 @@ else:
     
         if smiles:
             st.markdown(f"**SMILES:** `{smiles}`")
-            mol = MolFromSmiles(smiles)
             st.image(Draw.MolToImage(mol, size=(250, 250)))
