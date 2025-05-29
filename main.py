@@ -197,7 +197,3 @@ else:
   
         st.subheader("✏️ Molecule editor")
         smiles = st_ketcher(value=st.session_state.get("preset_smiles", ""))
-    
-        if smiles:
-            st.markdown(f"**SMILES:** `{smiles}`")
-            st.image(Draw.MolToImage(mol, size=(250, 250)))
