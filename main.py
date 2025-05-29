@@ -27,11 +27,11 @@ if page == "Home":
     ", published in *Scientific Data* last 2018 with 204 citations")
     st.header("Select a feature from the sidebar.")
     st.markdown("""
-    - **Searcher**: Lookup compounds by compound Name/InChI/SMILES!  
-    - **2D Scatterplot** 2D Plot of Solubility vs one descriptor chosen by you!
-    - **3D Scatterplot** 3D Space of Solubility vs two descriptors chosen by you!
-    - **Solubility Comparison Tool** Compare solubilities of different compounds!
-    - **Molecule Visualizer** Generate 2-D Structures of compounds in the database! Or Search compound name from your drawing!
+    - **Searcher**: Lookup compounds by compound IUPAC Name/InChI/SMILES!  
+    - **2D Scatterplot**: 2D Plot of Solubility vs one descriptor chosen by you!
+    - **3D Scatterplot**: 3D Space of Solubility vs two descriptors chosen by you!
+    - **Solubility Comparison Tool**: Compare solubilities of different compounds!
+    - **Molecule Visualizer**: Generate 2-D structures of compounds in the database! Or Search compound name from your drawing!
     """)
 
 #1. SEARCHER ----------------------------------------
