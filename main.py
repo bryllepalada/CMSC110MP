@@ -27,7 +27,7 @@ if page == "Home":
     - **2D Scatterplot** 2D Plot of Solubility vs one descriptor 
     - **3D Scatterplot** 3D Space of Solubility vs two descriptors
     - **Solubility Comparison Tool** Compare solubilities of different compounds!
-    - **Molecule Visualizer** Generate 2-D Structures of compounds through their skeletal structure!
+    - **Molecule Visualizer** Generate 2-D Structures of compounds in the database!
     """)
 
 #1. SEARCHER ----------------------------------------
