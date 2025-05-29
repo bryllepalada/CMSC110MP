@@ -12,7 +12,7 @@ page = st.sidebar.selectbox("Select function", ["Home",
                                                 "Searcher",
                                                 "2D Scatterplot",
                                                 "3D Scatterplot",
-                                                "Solubility Comparison", #add another functionality for #4
+                                                "Solubility Comparison",
                                                 "Function 5"]) #add another functionality for #5 
 df = load_data()
 
@@ -137,7 +137,7 @@ elif page == "3D Scatterplot":
     # — Display —
     st.plotly_chart(fig, use_container_width=True)
 
-elif page == "Function 4":
+elif page == "Solubility Comparison":
     st.title("📊 Solubility Comparison Tool")
     st.write("Select compounds below to compare their solubility values (LogS).")
 
