@@ -194,6 +194,12 @@ else:
             if st.sidebar.button(f"Load ➜ {row['Name']} ({row['ID']})"):
                 st.session_state["preset_smiles"] = row["SMILES"]
     
-  
-        st.subheader("Visualizer:")
-        smiles = st_ketcher(value=st.session_state.get("preset_smiles", ""))
+    if smiles:
+        records = df[df["SMILES"] == smiles]
+        if not records.empty:
+            st.success("Match found in dataset! Displaying properties below.")
+            st.dataframe(records.T.rename(columns={records.index[0]: "Value"}))
+        else:
+            st.info("No matching entry in the dataset. Try browsing or drawing another molecule.")
+    else:
+        st.info("Draw or load a molecule to see its properties here.")
