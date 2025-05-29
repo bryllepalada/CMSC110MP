@@ -172,7 +172,7 @@ elif page == "Solubility Comparison":
         st.info("Please select one or more compounds to compare.")
 
 else:
-    st.title("💧 Aqueous Solubility Explorer")
+    st.title("⚛️ Molecule Visualizer")
     st.caption("Draw a molecule or pick one from the dataset to see its experimental solubility.")
     st.sidebar.header("Dataset Browser")
 
