@@ -172,8 +172,6 @@ elif page == "Function 4":
         st.info("Please select one or more compounds to compare.")
 
 else:
-    df = load_data(DATA_PATH)
-
     st.title("💧 Aqueous Solubility Explorer")
     st.caption("Draw a molecule or pick one from the dataset to see its experimental solubility.")
 
