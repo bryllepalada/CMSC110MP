@@ -20,10 +20,12 @@ df = load_data()
 
 if page == "Home":
     st.title("🔬 Welcome to the AqSolDB Explorer!")
-    st.write("Select a feature from the sidebar above.")
+    st.write("Select a feature from the sidebar..")
     st.markdown("""
-    - **Scatterplot**: solubility vs descriptor  
-    - **Searcher**: lookup compounds by name/InChI/SMILES  
+    - **Searcher**: lookup compounds by compound name/InChI/SMILES  
+    - **Scatterplot**: 2D Plot: Solubility vs one descriptor 
+    - **Scatterplot**: 3D Space: Solubility vs two descriptors
+    - **Scatterplot**: Solubility Comparison: compare solubilities of different compounds!
     """)
 
 #1. SEARCHER ----------------------------------------
