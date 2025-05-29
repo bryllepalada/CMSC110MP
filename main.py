@@ -174,15 +174,50 @@ elif page == "Solubility Comparison":
 else:
     st.title("💧 Aqueous Solubility Explorer")
     st.caption("Draw a molecule or pick one from the dataset to see its experimental solubility.")
-    
-    DEFAULT_MOL = (
-        r"C[N+]1=CC=C(/C2=C3\C=CC(=N3)/C(C3=CC=CC(C(N)=O)=C3)=C3/C=C/C(=C(\C4=CC=[N+]"
-        "(C)C=C4)C4=N/C(=C(/C5=CC=CC(C(N)=O)=C5)C5=CC=C2N5)C=C4)N3)C=C1"
-    )
-    with st.echo():
-        molecule = st.text_input("Molecule", DEFAULT_MOL)
-        smile_code = st_ketcher(molecule)
-        st.markdown(f"Smile code: ``{smile_code}``")
+    st.sidebar.header("Dataset Browser")
 
-    st.write("---")
+    def show_table():
+        st.dataframe(
+            df[["ID", "Name", "SMILES", "Solubility", "MolWt", "MolLogP"]].sort_values("Solubility"),
+            use_container_width=True,
+        )
+
+    if st.sidebar.checkbox("Show data table"):
+        show_table()
+
+    # Quick search by Name/ID
+    query = st.sidebar.text_input("🔍 Quick search (Name or ID)")
+    if query:
+        hits = df[df["Name"].str.contains(query, case=False) | df["ID"].str.contains(query, case=False)]
+        st.sidebar.write(f"Found {len(hits)} match(es)")
+        for idx, row in hits.head(5).iterrows():
+            if st.sidebar.button(f"Load ➜ {row['Name']} ({row['ID']})"):
+                st.session_state["preset_smiles"] = row["SMILES"]
+    
+    # --- Main layout ----------------------------------------------------------
+    left, right = st.columns([1, 1])
+    
+    with left:
+        st.subheader("✏️ Molecule editor")
+        smiles = st_ketcher(value=st.session_state.get("preset_smiles", ""))
+    
+        if smiles:
+            st.markdown(f"**SMILES:** `{smiles}`")
+            mol = Chem.MolFromSmiles(smiles)
+            if mol:
+                st.image(Draw.MolToImage(mol, size=(250, 250)))
+            else:
+                st.error("⚠️ RDKit could not parse this SMILES.")
+
+    with right:
+        st.subheader("🧪 Experimental data")
+        if smiles:
+            records = df[df["SMILES"] == smiles]
+            if not records.empty:
+                st.success("Match found in dataset! Displaying properties below.")
+                st.dataframe(records.T.rename(columns={records.index[0]: "Value"}))
+            else:
+                st.info("No matching entry in the dataset. Try browsing or drawing another molecule.")
+        else:
+            st.info("Draw or load a molecule to see its properties here.")
     
