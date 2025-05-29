@@ -12,7 +12,7 @@ page = st.sidebar.selectbox("Select function", ["Home",
                                                 "Searcher",
                                                 "2D Scatterplot",
                                                 "3D Scatterplot",
-                                                "Function 4", #add another functionality for #4
+                                                "Solubility Comparison", #add another functionality for #4
                                                 "Function 5"]) #add another functionality for #5 
 df = load_data()
 
