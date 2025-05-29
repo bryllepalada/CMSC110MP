@@ -27,7 +27,7 @@ if page == "Home":
     - **2D Scatterplot** 2D Plot of Solubility vs one descriptor 
     - **3D Scatterplot** 3D Space of Solubility vs two descriptors
     - **Solubility Comparison Tool** Compare solubilities of different compounds!
-    - **Molecule Visualizer** Generate 2-D Structures of compounds
+    - **Molecule Visualizer** Generate 2-D Structures of compounds through their skeletal structure!
     """)
 
 #1. SEARCHER ----------------------------------------
@@ -162,7 +162,7 @@ elif page == "Solubility Comparison":
             x="Name",
             y="Solubility",
             color="Solubility",
-            color_continuous_scale="Blues",
+            color_continuous_scale="Viridis",
             labels={"Solubility": "LogS"},
             title="Solubility Comparison"
         )
