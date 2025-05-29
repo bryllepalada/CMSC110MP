@@ -27,11 +27,11 @@ if page == "Home":
     ", published in *Scientific Data* last 2018 with 204 citations")
     st.header("Select a feature from the sidebar.")
     st.markdown("""
-    - **Searcher**: lookup compounds by compound name/InChI/SMILES  
-    - **2D Scatterplot** 2D Plot of Solubility vs one descriptor 
-    - **3D Scatterplot** 3D Space of Solubility vs two descriptors
+    - **Searcher**: Lookup compounds by compound Name/InChI/SMILES!  
+    - **2D Scatterplot** 2D Plot of Solubility vs one descriptor chosen by you!
+    - **3D Scatterplot** 3D Space of Solubility vs two descriptors chosen by you!
     - **Solubility Comparison Tool** Compare solubilities of different compounds!
-    - **Molecule Visualizer** Generate 2-D Structures of compounds in the database!
+    - **Molecule Visualizer** Generate 2-D Structures of compounds in the database! Or Search compound name from your drawing!
     """)
 
 #1. SEARCHER ----------------------------------------
@@ -72,7 +72,6 @@ elif page == "2D Scatterplot":
         index=10  # default to MolWt
     )
 
-    # --- Scatter Plot ---
     fig = px.scatter(
         df,
         x=x_option,
@@ -84,22 +83,18 @@ elif page == "2D Scatterplot":
         title=f"Solubility vs. {x_option} (filtered by MolWt)"
     )
 
-    # Tweak layout if needed
     fig.update_layout(
         coloraxis_colorbar=dict(title="LogS"),
         margin=dict(l=40, r=40, t=80, b=40)
     )
 
-    # --- Display ---
     st.plotly_chart(fig, use_container_width=True)
 
 elif page == "3D Scatterplot":
     st.title("🗺️ 3D Chemical Space: Solubility vs Descriptors")
 
-    # — Load —
     st.sidebar.header("Filter & Plot Settings")
 
-    # 1) MolWt slider filter
     min_mw, max_mw = float(df["MolWt"].min()), float(df["MolWt"].max())
     mw_low, mw_high = st.sidebar.slider(
         "Show scatterplot datapoints based on molecular weight range:",
@@ -110,7 +105,6 @@ elif page == "3D Scatterplot":
     )
     df = df[(df["MolWt"] >= mw_low) & (df["MolWt"] <= mw_high)]
 
-    # — Sidebar: axis selectors —
     st.sidebar.header("3D Scatter Settings")
     cols = [
         "NumHAcceptors","NumHDonors","NumHeteroatoms","NumRotatableBonds",
@@ -121,7 +115,6 @@ elif page == "3D Scatterplot":
     x_axis = st.sidebar.selectbox("X axis", cols, index=0)
     y_axis = st.sidebar.selectbox("Y axis", cols, index=1)
 
-    # — Build 3D scatter —
     fig = px.scatter_3d(
         df,
         x=x_axis,
@@ -143,18 +136,15 @@ elif page == "3D Scatterplot":
         margin=dict(l=0, r=0, b=0, t=50)
     )
 
-    # — Display —
     st.plotly_chart(fig, use_container_width=True)
 
 elif page == "Solubility Comparison":
     st.title("📊 Solubility Comparison Tool")
     st.write("Select compounds below to compare their solubility values (LogS).")
 
-    # Multiselect for compound names
     compound_options = df["Name"].dropna().unique()
     selected = st.multiselect("Select compounds to compare:", compound_options)
 
-    # Filter and show comparison
     if selected:
         compare_df = df[df["Name"].isin(selected)][["Name", "Solubility"]].drop_duplicates()
 
@@ -190,7 +180,6 @@ else:
     if st.sidebar.checkbox("Show data table"):
         show_table()
 
-    # Quick search by Name/ID
     query = st.sidebar.text_input("🔍 Quick search (Name or ID)")
     if query:
         hits = df[df["Name"].str.contains(query, case=False) | df["ID"].str.contains(query, case=False)]
