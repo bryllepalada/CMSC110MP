@@ -194,6 +194,7 @@ else:
             if st.sidebar.button(f"Load ➜ {row['Name']} ({row['ID']})"):
                 st.session_state["preset_smiles"] = row["SMILES"]
     
+    smiles = st_ketcher(value=st.session_state.get("preset_smiles", ""))
     if smiles:
         records = df[df["SMILES"] == smiles]
         if not records.empty:
