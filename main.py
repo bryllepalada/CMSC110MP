@@ -138,8 +138,34 @@ elif page == "3D Scatterplot":
     st.plotly_chart(fig, use_container_width=True)
 
 elif page == "Function 4":
-    #insert code of chosen functionality 4
-    st.markdown("kantot mo ako daddy")
+    st.title("📊 Solubility Comparison Tool")
+    st.write("Select compounds below to compare their solubility values (LogS).")
+
+    # Multiselect for compound names
+    compound_options = df["Name"].dropna().unique()
+    selected = st.multiselect("Select compounds to compare:", compound_options)
+
+    # Filter and show comparison
+    if selected:
+        compare_df = df[df["Name"].isin(selected)][["Name", "Solubility"]].drop_duplicates()
+
+        st.subheader("📋 Comparison Table")
+        st.dataframe(compare_df, use_container_width=True)
+
+        st.subheader("📈 Solubility Bar Chart (LogS)")
+        fig = px.bar(
+            compare_df,
+            x="Name",
+            y="Solubility",
+            color="Solubility",
+            color_continuous_scale="Blues",
+            labels={"Solubility": "LogS"},
+            title="Solubility Comparison"
+        )
+        fig.update_layout(xaxis_title="Compound", yaxis_title="Solubility (LogS)")
+        st.plotly_chart(fig, use_container_width=True)
+    else:
+        st.info("Please select one or more compounds to compare.")
 
 else:
     #insert code if chosen functionality 5
