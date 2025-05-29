@@ -14,7 +14,7 @@ page = st.sidebar.selectbox("Select function", ["Home",
                                                 "2D Scatterplot",
                                                 "3D Scatterplot",
                                                 "Solubility Comparison",
-                                                "Function 5"]) #add another functionality for #5 
+                                                "Molecule Visualizer"]) 
 df = load_data()
 
 #HOMEPAGE ----------------------------------------
