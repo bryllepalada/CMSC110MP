@@ -23,9 +23,10 @@ if page == "Home":
     st.write("Select a feature from the sidebar..")
     st.markdown("""
     - **Searcher**: lookup compounds by compound name/InChI/SMILES  
-    - **Scatterplot**: 2D Plot: Solubility vs one descriptor 
-    - **Scatterplot**: 3D Space: Solubility vs two descriptors
-    - **Scatterplot**: Solubility Comparison: compare solubilities of different compounds!
+    - **2D Scatterplot** 2D Plot of Solubility vs one descriptor 
+    - **3D Scatterplot** 3D Space of Solubility vs two descriptors
+    - **Solubility Comparison Tool** Compare solubilities of different compounds!
+    - **insert renzo's** under construction
     """)
 
 #1. SEARCHER ----------------------------------------
