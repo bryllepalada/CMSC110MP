@@ -23,9 +23,8 @@ if page == "Home":
     st.title("Welcome to SoluSilip!")
     st.write("This interactive web app is based on AqSolDB dataset by  Murat Sorkhun, Abishek Khetan and Er Süleyman.")
     st.write(
-    "You may view their data set here"
-    "[AqSolDB](https://www.nature.com/articles/s41597-019-0151-1) "
-    "published in *Scientific Data*.")
+    "You may view their data set [here](https://www.nature.com/articles/s41597-019-0151-1)
+    "published in *Scientific Data* last 2018 with 204 citations")
     st.header("Select a feature from the sidebar.")
     st.markdown("""
     - **Searcher**: lookup compounds by compound name/InChI/SMILES  
